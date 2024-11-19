@@ -4,15 +4,18 @@
     <title>Redirector</title>
     <script>
         window.onload = function() {
-            const params = new URLSearchParams(window.location.search);
-            const base64Url = params.get("s");
-            if (base64Url) {
+            const query = window.location.search;
+            if (query.includes("?s=")) {
+                const base64Url = query.split("?s=")[1];
                 try {
                     const decodedUrl = atob(decodeURIComponent(base64Url));
                     window.location.href = decodedUrl;
                 } catch (e) {
                     console.error("Invalid base64 string");
+                    document.body.innerHTML = "Error: Invalid URL!";
                 }
+            } else {
+                document.body.innerHTML = "Error: No URL provided!";
             }
         };
     </script>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirecting...</title>
+    <script>
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const base64Url = params.get("s");
+            if (base64Url) {
+                try {
+                    const decodedUrl = atob(base64Url);
+                    window.location.href = decodedUrl;
+                } catch (e) {
+                    console.error("Invalid base64 string");
+                }
+            }
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>
